@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Micke Nannini – livemusik till bröllop, firmafest och andra evenemang.">
+  <title>Micke Nannini — Livemusik för era stunder</title><link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preconnect" href="https://images.unsplash.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="page-mode">
+  <div class="demo-note">Liveartist i Stockholm med omnejd</div>
+  <header class="site-header">
+    <div class="brand-group">
+      <a class="wordmark" href="#home" data-view-link="home" aria-label="Michael Nannini – startsida">MICHAEL NANNINI</a>
+      <button class="header-player-toggle" id="header-player-toggle" type="button" aria-label="Spela musik" aria-pressed="false" title="Spela musik"><svg class="icon-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10-6.5z" fill="currentColor"/></svg><svg class="icon-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h4v14H7zm6 0h4v14h-4z" fill="currentColor"/></svg></button>
+    </div>
+    <button class="menu-toggle" aria-expanded="false" aria-controls="main-nav">Meny <span>☰</span></button>
+    <nav id="main-nav" class="main-nav" aria-label="Huvudmeny">
+      <a href="#om" data-view-link="om">Lär känna Micke</a>
+      <a href="#repertoar" data-view-link="repertoar">Repertoar</a>
+      <div class="dropdown"><button class="dropdown-toggle" aria-expanded="false">Evenemang <svg class="dropdown-chevron" viewBox="0 0 12 8" aria-hidden="true"><path d="m1 1.5 5 5 5-5"/></svg></button>
+        <div class="dropdown-menu"><a href="brollop.html">Bröllop</a><a href="afterski.html">Afterski</a><a href="firmafest.html">Firmafest</a><a href="evenemang.html">Övriga evenemang</a></div>
+      </div>
+      <a href="#kontakt" class="nav-contact" data-view-link="kontakt">Boka/Kontakt</a>
+      <a class="spotify-header" href="https://open.spotify.com/artist/16GHxoGRHdiOikgNVW4Zbb?si=be-ZVWMhS5afyu9l3d_1HA" target="_blank" rel="noopener noreferrer" aria-label="Öppna Michael Nanninis Spotifyprofil" title="Michael Nannini på Spotify"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#292926"/><path d="M5.2 9.1c4.2-1.2 9.2-.7 13.1 1.6M6.1 12.1c3.6-1 7.8-.5 11 1.4M7 14.9c3-.8 6.3-.4 8.9 1.1" fill="none" stroke="#f4f3ef" stroke-width="1.7" stroke-linecap="round"/></svg></a>
+    </nav>
+  </header>
+  <main class="page-stage" id="page-stage"><div class="page-track"><section class="page-view is-active" data-view="home" aria-label="Startsida">
+    <section class="hero" aria-labelledby="hero-title">
+      <img class="hero-image" src="hero-michael-nannini.png" alt="Michael Nannini sjunger och spelar gitarr vid en mikrofon" fetchpriority="high">
+      <div class="hero-shade"></div>
+      <div class="hero-content"><p class="eyebrow">Livemusik med hjärta och närvaro</p><h1 id="hero-title">En kväll att minnas.<br><em>Musik som känns.</em></h1><p class="hero-copy">Med mångårig erfarenhet och en lyhörd känsla för stunden skapar jag livemusik som passar just er – från bröllopets första ton till festens sista extranummer.</p><a class="button button-light" href="#kontakt" data-view-link="kontakt">Låt oss planera er kväll <span>↗</span></a></div>
+      
+    </section>
+    </section><section class="page-view" data-view="om" aria-label="Om Micke">
+    <section class="intro section-grid" id="om">
+      <div class="intro-image-wrap"><img src="https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?auto=format&fit=crop&w=1000&q=80" alt="Publik njuter av livemusik" loading="lazy"><span class="image-index">LIVE / 2025</span></div>
+      <div class="intro-copy"><p class="eyebrow">Om Micke</p><h2>En gitarr, en röst<br>och rätt känsla.</h2><p class="trust-statement">Mångårig erfarenhet. Ett professionellt genomförande. Underhållning på dina villkor.</p><p class="lead">Jag har lång erfarenhet av liveunderhållning och vet hur viktig rätt känsla är. Jag är lyhörd, professionell och väl förberedd, så att du kan känna dig trygg från första kontakten till sista låten.</p><p>Berätta vilken stämning du vill ha – jag tar underhållningen dit du vill.</p><a class="text-link" href="#kontakt" data-view-link="kontakt">Har du någon fundering, fråga mig <span>→</span></a></div>
+    </section>
+    </section><section class="page-view" data-view="repertoar" aria-label="Repertoar"><section class="music-section" id="repertoar"><div class="music-inner"><div><p class="eyebrow">Lyssna in</p><h2>En liten försmak<br>av livemusiken.</h2></div><div class="player-card"><div class="record" aria-hidden="true"></div><div class="track-info"><strong>Maple Leaf Rag</strong></div><audio id="site-audio" controls preload="none" aria-label="Exempel på ljudspelare"><source src="https://upload.wikimedia.org/wikipedia/commons/0/09/Scott_Joplin_-_Maple_Leaf_Rag.ogg" type="audio/ogg">Din webbläsare kan inte spela upp ljudet.</audio></div></div></section>
+    </section><section class="page-view" data-view="evenemang" aria-label="Evenemang"><section class="events-section" id="spelningar"><div class="section-heading"><div><p class="eyebrow">Olika tillfällen, samma närvaro</p><h2>Musik för er sorts kväll.</h2></div><p>Välj sammanhang så berättar vi mer om hur musiken kan passa just ert evenemang.</p></div><div class="event-cards"><a class="event-card" href="brollop.html"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=900&q=80" alt="Bröllopsdukning i mjukt kvällsljus" loading="lazy"><span class="event-number">01</span><span class="event-label">Bröllop <b>↗</b></span></a><a class="event-card" href="afterski.html"><img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=900&q=80" alt="Snöklädda berg i kvällsljus" loading="lazy"><span class="event-number">02</span><span class="event-label">Afterski <b>↗</b></span></a><a class="event-card" href="firmafest.html"><img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=900&q=80" alt="Festlokal för ett företagsevenemang" loading="lazy"><span class="event-number">03</span><span class="event-label">Firmafest <b>↗</b></span></a></div></section>
+    
+    </section><section class="page-view" data-view="kontakt" aria-label="Boka och kontakt"><section class="contact-section" id="kontakt"><div class="contact-copy"><p class="eyebrow">Låt oss planera</p><h2>Vad firar ni?</h2><p>Berätta lite om ert evenemang så återkommer Micke med idéer och information om tillgänglighet.</p><div class="contact-detail"><span>KONTAKT</span><a href="mailto:lowe.flemstrom@gmail.com">lowe.flemstrom@gmail.com</a></div><p class="demo-copy">När formuläret skickas öppnas ditt mejlprogram med uppgifterna ifyllda. Tryck på Skicka där.</p></div><form class="contact-form" id="contact-form"><div class="form-row"><label>Namn<input required name="name" autocomplete="name" placeholder="Ditt namn"></label><label>E-post<input required type="email" name="email" autocomplete="email" placeholder="du@exempel.se"></label></div><label>Typ av evenemang<select name="event"><option value="">Välj ett tillfälle</option><option>Bröllop</option><option>Afterski</option><option>Firmafest</option><option>Annat evenemang</option></select></label><label>Meddelande<textarea required name="message" rows="4" placeholder="Datum, plats och vad ni planerar …"></textarea></label><button class="button button-dark" type="submit">Skapa mejl <span>↗</span></button><p class="form-status" id="form-status" role="status">Formuläret öppnar ett färdigifyllt mejl till lowe.flemstrom@gmail.com.</p></form></section></section></div></main>
+<div class="trustline site-contact-bar" aria-label="Kontaktuppgifter"><span>© 2026</span><a href="mailto:swepoprecords@gmail.com">swepoprecords@gmail.com</a><a href="tel:+46736413373">073-641 33 73</a></div>
+<section class="reviews-section" aria-labelledby="reviews-title"><div class="reviews-heading"><p class="eyebrow">Röster från kvällen</p><h2 id="reviews-title">Vad mina kunder<br>tar med sig.</h2><div class="drag-hint" aria-label="Dra panelen för fler kundomdömen"><span>Fler omdömen</span><b aria-hidden="true">↕</b></div></div><div class="review-window" id="review-window" tabindex="0" aria-label="Recensioner, dra eller använd piltangenterna"><div class="review-track" id="review-track">
+      <article class="review-card"><div class="stars">★★★★★</div><blockquote>”Micke prickade in precis rätt känsla hela kvällen. Vi och gästerna ville aldrig att spelningen skulle ta slut.”</blockquote><p><b>Anna &amp; Johan</b><span>Bröllop · exempelomdöme</span></p></article>
+      <article class="review-card"><div class="stars">★★★★★</div><blockquote>”Vilken stämning! Från första låten var hela gänget med. Ett varmt och proffsigt inslag på vår fest.”</blockquote><p><b>Maria L.</b><span>Firmafest · exempelomdöme</span></p></article>
+      <article class="review-card"><div class="stars">★★★★★</div><blockquote>”Lyhörd, lätt att samarbeta med och en repertoar som passade alla generationer. Rekommenderas varmt.”</blockquote><p><b>Anders &amp; Sofia</b><span>Födelsedagsfest · exempelomdöme</span></p></article>
+      </div><div class="review-fade"></div></div></section>
+  <footer class="site-footer"><a class="wordmark" href="#home" data-view-link="home">MICHAEL NANNINI</a><p>Livemusik för stunder att minnas.</p><span>© 2025 · DEMOSIDA</span></footer>
+  <script src="script.js" defer></script>
+</body></html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
