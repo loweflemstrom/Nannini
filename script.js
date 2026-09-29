@@ -2,6 +2,7 @@
   const menuButton = document.querySelector('.menu-toggle');
   const nav = document.querySelector('.main-nav');
   const views = [...document.querySelectorAll('.page-view')];
+  const pageStage = document.querySelector('.page-stage');
   const viewNames = ['home', 'om', 'repertoar', 'evenemang', 'kontakt'];
   const viewForHash = { home: 'home', om: 'om', repertoar: 'repertoar', spelningar: 'evenemang', evenemang: 'evenemang', kontakt: 'kontakt' };
   let activeView = views.find(view => view.classList.contains('is-active'))?.dataset.view || 'home';
@@ -9,13 +10,23 @@
   const showView = (name, updateHistory = true, animate = true) => {
     const next = views.find(view => view.dataset.view === name);
     if (!next || name === activeView) return;
+    if (animate && pageStage) {
+      pageStage.classList.remove('is-transitioning');
+      void pageStage.offsetWidth;
+      pageStage.classList.add('is-transitioning');
+      document.body.classList.add('page-smoke-active');
+      window.setTimeout(() => {
+        pageStage.classList.remove('is-transitioning');
+        document.body.classList.remove('page-smoke-active');
+      }, 1850);
+    }
     const current = views.find(view => view.dataset.view === activeView);
-    const direction = viewNames.indexOf(name) >= viewNames.indexOf(activeView) ? 'right' : 'left';
+    const direction = viewNames.indexOf(name) > viewNames.indexOf(activeView) ? 'left' : 'right';
     if (current && animate) {
       current.classList.remove('is-active');
       current.classList.add(`is-leaving-${direction}`);
       current.setAttribute('aria-hidden', 'true');
-      window.setTimeout(() => current.classList.remove(`is-leaving-${direction}`), 700);
+      window.setTimeout(() => current.classList.remove(`is-leaving-${direction}`), 1650);
     } else {
       current?.classList.remove('is-active');
       current?.setAttribute('aria-hidden', 'true');
@@ -131,6 +142,27 @@
 
   const headerPlayButton = document.querySelector('#header-player-toggle');
   const siteAudio = document.querySelector('#site-audio');
+  const trackSelect = document.querySelector('#track-select');
+  const trackTitle = document.querySelector('#track-title');
+  const previousTrackButton = document.querySelector('#track-previous');
+  const nextTrackButton = document.querySelector('#track-next');
+  if (siteAudio && trackSelect) {
+    const audioSource = siteAudio.querySelector('source');
+    trackSelect.addEventListener('change', () => {
+      const shouldResume = !siteAudio.paused;
+      siteAudio.pause();
+      audioSource.src = trackSelect.value;
+      if (trackTitle) trackTitle.textContent = trackSelect.selectedOptions[0].textContent;
+      siteAudio.load();
+      if (shouldResume) siteAudio.play().catch(() => {});
+    });
+    const moveTrack = direction => {
+      trackSelect.selectedIndex = (trackSelect.selectedIndex + direction + trackSelect.options.length) % trackSelect.options.length;
+      trackSelect.dispatchEvent(new Event('change', { bubbles: true }));
+    };
+    previousTrackButton?.addEventListener('click', () => moveTrack(-1));
+    nextTrackButton?.addEventListener('click', () => moveTrack(1));
+  }
   if (headerPlayButton && siteAudio) {
     const reflectPlayback = () => {
       const playing = !siteAudio.paused;

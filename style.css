@@ -138,9 +138,9 @@ body.page-mode .reviews-section{top:132px;bottom:24px}
 @media(min-width:801px) and (max-width:1280px){body.page-mode .page-view[data-view="home"] .hero{height:100%}body.page-mode .reviews-section{top:132px;bottom:24px}}
 @media(max-width:800px){body.page-mode .page-view[data-view="home"] .hero{height:100%}body.page-mode .page-view[data-view="home"] .hero-content{top:44%;transform:translateY(-48%)}body.page-mode .page-view[data-view="home"] .hero h1{font-size:clamp(38px,6.4vw,70px)}body.page-mode .page-view[data-view="home"] .trustline{left:0;right:0;bottom:0;height:48px;min-height:48px;padding:10px 6%;font-size:7px}body.page-mode .reviews-section{top:auto;bottom:24px}}
 
-/* Lift the home CTA away from the lower trustline */
-body.page-mode .page-view[data-view="home"] .hero-copy{margin-bottom:15px}
-body.page-mode .page-view[data-view="home"] .hero-content .button{transform:translateY(-10px)}
+/* Balance the space around the home CTA against the lower trustline. */
+body.page-mode .page-view[data-view="home"] .hero-copy{margin-bottom:30px}
+body.page-mode .page-view[data-view="home"] .hero-content .button{transform:none}
 
 /* Keep equal breathing room above and below the reviews, stopping above the trustline */
 body.page-mode .reviews-section{bottom:76px}
@@ -167,8 +167,26 @@ body.page-mode .site-contact-bar{justify-content:center;gap:clamp(16px,2.4vw,34p
 .demo-note{text-transform:none}
 
 /* Match the top service label to the footer contact text */
-.demo-note{font-size:14px;font-weight:500;line-height:1.2;letter-spacing:.01em;padding-top:6px;padding-bottom:6px;text-transform:none}
+.demo-note{font:500 14px/1.3 var(--sans);letter-spacing:.15em;padding-top:6px;padding-bottom:6px;text-transform:none}
 @media(max-width:800px){.demo-note{font-size:clamp(10px,2.8vw,13px)}}
+body.page-mode .main-nav>a,body.page-mode .dropdown-toggle{font:500 14px/1.3 var(--sans)}
+body.page-mode .demo-note{border-bottom:1px solid rgba(255,255,255,.22)}
+body.page-mode .site-contact-bar{border-top:1px solid #d8d6cf}
+body.page-mode .site-header{border-bottom:1px solid #e1dfd9}
+body.page-mode .spotify-header svg{width:38px;height:38px}
+@media(max-width:800px){body.page-mode .spotify-header svg{width:35px;height:35px}}
+body.page-mode .page-view[data-view="repertoar"] .music-section{height:100%;min-height:100%;padding-top:38px;padding-bottom:38px}
+body.page-mode .page-view[data-view="repertoar"] .music-inner{height:100%;align-items:stretch}
+body.page-mode .page-view[data-view="repertoar"] .genre-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:repeat(6,minmax(0,1fr));grid-auto-flow:column;align-self:stretch;gap:0;margin:0;padding:0;list-style:none;border-top:1px solid var(--line)}
+body.page-mode .page-view[data-view="repertoar"] .genre-list li{display:flex;align-items:center;padding:10px 8px 10px 0;border-bottom:1px solid var(--line);font-size:12px;color:#69685f}
+body.page-mode .page-view[data-view="repertoar"] .player-column{align-self:center;min-width:0}
+body.page-mode .page-view[data-view="repertoar"] .repertoire-todo{margin:0 0 20px;padding-left:19px;color:#77766e;font-size:12px;line-height:1.65}
+body.page-mode .page-view[data-view="repertoar"] .repertoire-todo li{padding:1px 0}
+body.page-mode .page-view[data-view="repertoar"] .repertoire-copy h2{max-width:540px;margin-bottom:18px}
+body.page-mode .page-view[data-view="repertoar"] .player-column>.text-link{margin-top:15px}
+@media(min-width:1000px){body.page-mode .page-view[data-view="repertoar"] .music-inner{grid-template-columns:minmax(0,1fr) minmax(280px,400px);gap:36px}body.page-mode .page-view[data-view="repertoar"] .player-column .player-card{justify-self:end}}
+@media(max-width:999px){body.page-mode .page-view[data-view="repertoar"] .music-inner{height:auto}body.page-mode .page-view[data-view="repertoar"] .genre-list{min-height:360px}body.page-mode .page-view[data-view="repertoar"] .player-column{padding-top:24px}}
+@media(max-width:800px){body.page-mode .page-view[data-view="repertoar"] .music-section{height:auto;min-height:100%;padding-top:38px;padding-bottom:185px}body.page-mode .page-view[data-view="repertoar"] .genre-list{min-height:320px}body.page-mode .page-view[data-view="repertoar"] .genre-list li{font-size:11px;padding:8px 5px 8px 0}}
 
 /* Enter each new view from the left, leaving the previous view to the right */
 @keyframes route-in-from-left{from{opacity:0;transform:translateX(-8%)}to{opacity:1;transform:translateX(0)}}
@@ -192,3 +210,124 @@ body.page-mode .page-view[data-view="home"] .hero-content,body.page-mode .page-v
 body.page-mode .page-stage{margin-right:0!important}
 body.page-mode .page-view[data-view="home"] .hero{width:100%!important;margin-right:0!important}
 @media(min-width:801px) and (max-width:1280px){body.page-mode .page-view[data-view="home"] .hero{width:100%!important;margin-right:0!important}}
+
+/* A visible denim-blue smoke sweep accompanies horizontal page changes */
+body.page-mode .page-stage::after{content:"";position:absolute;z-index:8;pointer-events:none;top:-8%;bottom:-8%;left:-22%;width:72%;opacity:0;filter:blur(28px) saturate(.78);mix-blend-mode:screen;background:radial-gradient(ellipse 40% 22% at 15% 28%,rgba(84,127,165,.72) 0%,rgba(84,127,165,.28) 48%,transparent 80%),radial-gradient(ellipse 55% 26% at 28% 54%,rgba(61,105,147,.78) 0%,rgba(61,105,147,.34) 46%,transparent 79%),radial-gradient(ellipse 43% 25% at 9% 78%,rgba(120,154,181,.62) 0%,rgba(120,154,181,.22) 48%,transparent 82%);transform:translate3d(-13%,4%,0) scale(.86)}
+body.page-mode .page-stage.is-transitioning::after{animation:transition-denim-smoke .76s ease-out both}
+@keyframes transition-denim-smoke{0%{opacity:0;transform:translate3d(-13%,5%,0) scale(.82)}24%{opacity:.78}64%{opacity:.58;transform:translate3d(7%,-1%,0) scale(1.05)}100%{opacity:0;transform:translate3d(19%,-5%,0) scale(1.18)}}
+body.page-enter-from-left::after,body.page-leaving-to-right::after{content:"";position:fixed;z-index:8;pointer-events:none;left:-20%;top:10%;bottom:10%;width:58%;opacity:0;filter:blur(30px) saturate(.78);mix-blend-mode:screen;background:radial-gradient(ellipse 42% 24% at 16% 28%,rgba(84,127,165,.66) 0%,rgba(84,127,165,.24) 48%,transparent 80%),radial-gradient(ellipse 55% 29% at 28% 56%,rgba(61,105,147,.72) 0%,rgba(61,105,147,.29) 48%,transparent 80%),radial-gradient(ellipse 42% 25% at 8% 79%,rgba(120,154,181,.52) 0%,rgba(120,154,181,.18) 48%,transparent 82%);transform:translate3d(-12%,4%,0) scale(.86)}
+body.page-enter-from-left::after{animation:transition-denim-smoke .76s ease-out both}
+body.page-leaving-to-right::after{animation:transition-denim-smoke .55s ease-out both}
+@media(prefers-reduced-motion:reduce){body.page-mode .page-stage.is-transitioning::after,body.page-enter-from-left::after,body.page-leaving-to-right::after{animation:none}}
+
+/* Stronger, guaranteed smoke layer during in-page transitions */
+body.page-mode.page-smoke-active::after{content:"";position:fixed;z-index:15;pointer-events:none;left:-18%;top:112px;bottom:56px;width:min(76vw,900px);opacity:.78;filter:blur(24px) saturate(.9);mix-blend-mode:screen;background:radial-gradient(ellipse 44% 24% at 16% 24%,rgba(82,133,175,.78) 0%,rgba(82,133,175,.36) 46%,transparent 78%),radial-gradient(ellipse 58% 29% at 30% 53%,rgba(49,105,153,.86) 0%,rgba(49,105,153,.42) 48%,transparent 79%),radial-gradient(ellipse 46% 25% at 11% 78%,rgba(117,158,189,.72) 0%,rgba(117,158,189,.32) 49%,transparent 82%);animation:denim-smoke-sweep 1.02s ease-out both}
+@keyframes denim-smoke-sweep{0%{opacity:0;transform:translate3d(-12%,3%,0) scale(.82)}22%{opacity:.9}54%{opacity:.82;transform:translate3d(5%,-1%,0) scale(1.03)}100%{opacity:0;transform:translate3d(16%,-5%,0) scale(1.16)}}
+@media(prefers-reduced-motion:reduce){body.page-mode.page-smoke-active::after{animation:none;opacity:.62;transform:none}}
+
+/* Denser denim smoke that remains visible over both light and dark areas */
+body.page-mode.page-smoke-active::after{opacity:.9;filter:blur(20px) saturate(1.08);mix-blend-mode:normal;background:radial-gradient(ellipse 45% 26% at 15% 24%,rgba(83,126,165,.72) 0%,rgba(83,126,165,.48) 34%,rgba(83,126,165,.18) 61%,transparent 82%),radial-gradient(ellipse 58% 31% at 30% 51%,rgba(58,101,143,.78) 0%,rgba(58,101,143,.54) 36%,rgba(58,101,143,.20) 64%,transparent 83%),radial-gradient(ellipse 47% 28% at 12% 78%,rgba(113,151,180,.72) 0%,rgba(113,151,180,.46) 38%,rgba(113,151,180,.16) 65%,transparent 84%),radial-gradient(ellipse 48% 25% at 39% 68%,rgba(92,129,162,.56) 0%,rgba(92,129,162,.28) 46%,transparent 80%)}
+@media(prefers-reduced-motion:reduce){body.page-mode.page-smoke-active::after{opacity:.72}}
+
+/* Make the transition smoke read clearly as a denim-blue plume along the full left edge. */
+body.page-mode.page-smoke-active::after{left:-8%;top:72px;bottom:50px;width:min(64vw,820px);opacity:.98;filter:blur(24px) saturate(1.4);background:radial-gradient(ellipse 58% 20% at 10% 9%,rgba(54,111,164,.88) 0%,rgba(54,111,164,.58) 43%,transparent 80%),radial-gradient(ellipse 62% 24% at 16% 30%,rgba(38,96,151,.92) 0%,rgba(38,96,151,.64) 45%,transparent 82%),radial-gradient(ellipse 68% 25% at 12% 53%,rgba(43,105,163,.94) 0%,rgba(43,105,163,.66) 46%,transparent 83%),radial-gradient(ellipse 62% 24% at 17% 75%,rgba(53,116,169,.90) 0%,rgba(53,116,169,.60) 46%,transparent 82%),radial-gradient(ellipse 56% 20% at 10% 96%,rgba(61,124,174,.84) 0%,rgba(61,124,174,.54) 44%,transparent 80%)}
+@keyframes denim-smoke-sweep{0%{opacity:0;transform:translate3d(-10%,2%,0) scale(.9)}18%{opacity:1}58%{opacity:.96;transform:translate3d(3%,0,0) scale(1.02)}100%{opacity:0;transform:translate3d(14%,-2%,0) scale(1.1)}}
+@media(prefers-reduced-motion:reduce){body.page-mode.page-smoke-active::after{opacity:.9}}
+
+/* Repertoire uses the same light canvas as the other content pages. */
+body.page-mode .page-view[data-view="repertoar"]{background:var(--paper)!important}
+body.page-mode .page-view[data-view="repertoar"] .music-section{background:var(--paper)!important;color:var(--ink)}
+body.page-mode .page-view[data-view="repertoar"] .music-section .eyebrow{color:var(--muted)}
+
+/* Micke's portrait is a quiet, monochrome imprint in the light About page. */
+body.page-mode .page-view[data-view="om"] .intro{position:relative;isolation:isolate;overflow:hidden}
+body.page-mode .page-view[data-view="om"] .intro::before{content:"";position:absolute;z-index:-1;pointer-events:none;top:-9%;right:-4%;bottom:-9%;width:58%;background:url("micke-portratt.webp") center 32%/cover no-repeat;filter:grayscale(1) contrast(.82);opacity:.18;mix-blend-mode:multiply;mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.18) 14%,#000 49%),linear-gradient(0deg,transparent 0%,#000 16%,#000 84%,transparent 100%);mask-composite:intersect}
+body.page-mode .page-view[data-view="om"] .intro>*{position:relative;z-index:1}
+@media(max-width:800px){body.page-mode .page-view[data-view="om"] .intro::before{top:0;right:-10%;bottom:0;width:75%;opacity:.12;background-position:center 30%}}
+body.page-mode .page-view[data-view="om"] .intro::before{content:none}
+body.page-mode .page-view[data-view="om"] .intro-image-wrap{min-height:390px;display:flex;align-items:center;justify-content:center;overflow:visible}
+body.page-mode .page-view[data-view="om"] .intro-image-wrap img{height:100%;min-height:390px;max-height:510px;object-fit:cover;object-position:center 28%;filter:grayscale(1) contrast(.82) brightness(1.12);opacity:.48;mix-blend-mode:multiply;mask-image:radial-gradient(ellipse 68% 76% at 50% 44%,#000 38%,rgba(0,0,0,.82) 58%,transparent 100%)}
+@media(max-width:800px){body.page-mode .page-view[data-view="om"] .intro-image-wrap{min-height:280px}body.page-mode .page-view[data-view="om"] .intro-image-wrap img{min-height:280px;max-height:330px;opacity:.42}}
+body.page-mode .page-view[data-view="om"] .intro-image-wrap{height:100%;min-height:390px;aspect-ratio:.78;background:url("micke-portratt.webp") 50% 68%/230% auto no-repeat;filter:grayscale(1) contrast(.78) brightness(1.12);opacity:.42;mix-blend-mode:multiply;mask-image:radial-gradient(ellipse 66% 78% at 50% 45%,#000 40%,rgba(0,0,0,.78) 63%,transparent 100%)}
+body.page-mode .page-view[data-view="om"] .intro-image-wrap img{display:none}
+@media(max-width:800px){body.page-mode .page-view[data-view="om"] .intro-image-wrap{height:330px;min-height:280px;aspect-ratio:.95;background-position:50% 68%;background-size:230% auto;opacity:.38}}
+body.page-mode .page-view[data-view="om"] .intro-image-wrap{display:none}
+body.page-mode .page-view[data-view="om"] .intro{position:relative;isolation:isolate}
+body.page-mode .page-view[data-view="om"] .intro-image-placeholder{position:absolute;z-index:0;left:0;top:0;bottom:0;width:72%;display:flex;align-items:center;padding:36px 12% 36px 7%;background:linear-gradient(90deg,#111 0%,#111 24%,rgba(17,17,17,.84) 36%,rgba(17,17,17,.52) 48%,rgba(17,17,17,.18) 59%,transparent 70%);color:rgba(255,255,255,.9);font-size:12px;letter-spacing:.04em}
+body.page-mode .page-view[data-view="om"] .intro-image-placeholder span{position:relative;display:block;max-width:260px;text-shadow:0 1px 5px #0009}
+body.page-mode .page-view[data-view="om"] .intro-image-placeholder ul{position:relative;margin:0;padding-left:20px;max-width:280px;text-shadow:0 1px 5px rgba(0,0,0,.18)}
+body.page-mode .page-view[data-view="om"] .intro-image-placeholder li{padding:5px 0}
+body.page-mode .page-view[data-view="om"] .intro-copy{position:relative;z-index:1;grid-column:2}
+@media(max-width:800px){body.page-mode .page-view[data-view="om"] .intro-image-placeholder{top:0;bottom:auto;height:300px;width:100%;padding:24px 8%;background:linear-gradient(180deg,#111 0%,#111 35%,rgba(17,17,17,.78) 54%,rgba(17,17,17,.36) 70%,transparent 86%)}body.page-mode .page-view[data-view="om"] .intro-copy{grid-column:1;margin-top:290px}}
+
+/* Compact light player, positioned in the clear left area beside the review rail. */
+body.page-mode .page-view[data-view="repertoar"] .music-section{padding:48px 9%;background:var(--paper)!important;color:var(--ink)}
+body.page-mode .page-view[data-view="repertoar"] .music-inner{width:min(100%,520px);max-width:520px;margin:0;grid-template-columns:1fr;gap:12px;align-items:start}
+body.page-mode .page-view[data-view="repertoar"] .music-section h2{font-size:clamp(32px,3.5vw,44px);margin-bottom:4px}
+body.page-mode .page-view[data-view="repertoar"] .music-section .eyebrow{color:var(--muted);margin-bottom:10px}
+body.page-mode .page-view[data-view="repertoar"] .player-card{width:min(100%,400px);padding:8px 0;background:transparent;border:0;display:grid;grid-template-columns:1fr;gap:8px;align-items:start}
+body.page-mode .page-view[data-view="repertoar"] .record{display:none}
+body.page-mode .page-view[data-view="repertoar"] .track-info{grid-template-columns:auto minmax(130px,1fr);align-items:center;gap:10px}
+body.page-mode .page-view[data-view="repertoar"] .track-info strong{font:500 16px var(--serif)}
+body.page-mode .page-view[data-view="repertoar"] .playlist-label{font-size:10px;color:var(--muted)}
+body.page-mode .page-view[data-view="repertoar"] #track-select{grid-column:1/-1;width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:0;background:#fff;color:var(--ink);font:12px var(--sans)}
+body.page-mode .page-view[data-view="repertoar"] .player-card audio{grid-column:1;width:100%;height:34px}
+@media(min-width:801px) and (max-width:1280px){body.page-mode .page-view[data-view="repertoar"] .music-inner{width:calc(100% - 290px)}}
+@media(max-width:800px){body.page-mode .page-view[data-view="repertoar"] .music-section{padding:38px 8% 185px}body.page-mode .page-view[data-view="repertoar"] .music-inner{width:100%}body.page-mode .page-view[data-view="repertoar"] .player-card{width:min(100%,400px)}}
+body.page-mode .page-view[data-view="repertoar"] .music-inner{width:calc(100% - 300px);max-width:1100px;grid-template-columns:minmax(0,1fr) minmax(280px,400px);gap:36px}
+body.page-mode .page-view[data-view="repertoar"] .player-card{justify-self:end}
+@media(min-width:801px) and (max-width:1280px){body.page-mode .page-view[data-view="repertoar"] .music-inner{width:calc(100% - 290px);grid-template-columns:1fr;gap:12px}body.page-mode .page-view[data-view="repertoar"] .player-card{justify-self:end}}
+@media(max-width:800px){body.page-mode .page-view[data-view="repertoar"] .music-inner{width:100%;grid-template-columns:1fr;gap:12px}body.page-mode .page-view[data-view="repertoar"] .player-card{justify-self:start}}
+
+/* Previous, play/pause and next controls share one consistent dimensional shadow. */
+.header-playback-controls{position:relative;isolation:isolate;display:flex;align-items:center;justify-content:center;gap:1px;margin-left:10px;filter:drop-shadow(-5px 7px 4px rgba(0,0,0,.24)) drop-shadow(-10px 13px 9px rgba(0,0,0,.16));transition:filter .2s ease}
+.header-playback-controls::before{content:"";position:absolute;z-index:-1;left:8%;right:8%;bottom:1px;height:14px;border-radius:50%;background:rgba(0,0,0,.2);filter:blur(10px);transform:translateY(8px) scaleX(.9)}
+.header-playback-controls:hover{filter:drop-shadow(-6px 9px 5px rgba(0,0,0,.27)) drop-shadow(-12px 16px 10px rgba(0,0,0,.19))}
+.brand-group .track-skip,.brand-group .header-player-toggle{position:relative;margin:0;padding:0;border:0;border-radius:0;background:transparent;color:var(--ink);display:grid;place-items:center;filter:none;transition:transform .18s ease}
+.brand-group .track-skip{width:30px;height:42px;cursor:pointer}
+.brand-group .track-skip svg{display:block;width:23px;height:23px;filter:drop-shadow(0 1px 0 rgba(255,255,255,.6)) drop-shadow(0 2px 2px rgba(0,0,0,.22))}
+.brand-group .header-player-toggle{width:48px;height:52px;transform:none}
+.brand-group .header-player-toggle svg{width:42px;height:42px;filter:drop-shadow(0 1px 0 rgba(255,255,255,.6)) drop-shadow(0 2px 2px rgba(0,0,0,.22))}
+.brand-group .header-player-toggle::before{display:none}
+.brand-group .track-skip:hover,.brand-group .header-player-toggle:hover{transform:translateY(-2px)}
+@media(max-width:800px){.header-playback-controls{gap:0;margin-left:6px}.brand-group .track-skip{width:25px;height:38px}.brand-group .track-skip svg{width:19px;height:19px}.brand-group .header-player-toggle{width:40px;height:44px}.brand-group .header-player-toggle svg{width:36px;height:36px}}
+
+/* Correct the hero photo's handedness, move the copy into the new open side,
+   and turn the shade toward the copy while reserving the review rail. */
+body.page-mode .page-view[data-view="home"] .hero-image{transform:scaleX(-1)}
+body.page-mode .page-view[data-view="home"] .hero-shade{background:linear-gradient(270deg,rgba(12,12,12,.78) 0%,rgba(12,12,12,.58) 35%,rgba(12,12,12,.25) 64%,rgba(12,12,12,.04) 100%)}
+body.page-mode .page-view[data-view="home"] .hero-content{left:52%;right:calc(300px + 3%);max-width:480px}
+body.page-mode .page-view[data-view="home"] .hero-content h1{font-size:clamp(40px,5vw,72px)}
+@media(min-width:801px) and (max-width:1280px){body.page-mode .page-view[data-view="home"] .hero-content{left:43%;right:268px;max-width:420px}body.page-mode .page-view[data-view="home"] .hero h1{font-size:clamp(38px,5vw,62px)}body.page-mode .page-view[data-view="home"] .hero-copy{font-size:14px}}
+@media(max-width:800px){body.page-mode .page-view[data-view="home"] .hero-content{left:42%;right:6%;max-width:none;top:44%;transform:translateY(-48%)}body.page-mode .page-view[data-view="home"] .hero h1{font-size:clamp(32px,8.4vw,48px);line-height:1.04}body.page-mode .page-view[data-view="home"] .hero-copy{font-size:12px;line-height:1.55}body.page-mode .page-view[data-view="home"] .hero-content .button{max-width:100%;gap:12px;padding:12px 13px}}
+
+/* Move complete page panels as adjoining slides, with no fade or empty seam. */
+body.page-mode .page-stage,body.page-mode .page-track{overflow:hidden}
+/* Fill any sub-pixel seam between moving page panels without exposing a moving image. */
+body.page-mode .page-stage{background:#242423}
+body.page-mode .page-view{opacity:0;transform:translateX(100%);transition:transform 1.08s cubic-bezier(.76,0,.24,1);will-change:transform}
+body.page-mode .page-view.is-active{opacity:1;transform:translateX(0)}
+body.page-mode .page-view.is-active.is-from-right{opacity:1;transform:translateX(100%)}
+body.page-mode .page-view.is-active.is-from-left{opacity:1;transform:translateX(-100%)}
+body.page-mode .page-view.is-leaving-left,body.page-mode .page-view.is-leaving-right{opacity:1;visibility:visible;pointer-events:none}
+body.page-mode .page-view.is-leaving-left{transform:translateX(-100%)}
+body.page-mode .page-view.is-leaving-right{transform:translateX(100%)}
+@media(prefers-reduced-motion:reduce){body.page-mode .page-view{transition:none}}
+
+/* Give horizontal page changes and the blue smoke a slower, softer finish. */
+body.page-mode .page-view{transition:transform 1s cubic-bezier(.2,.7,.2,1),opacity .78s ease,visibility 1s}
+body.page-mode .page-stage.is-transitioning::after{animation:transition-denim-smoke 1.8s cubic-bezier(.2,.7,.2,1) both}
+body.page-mode.page-smoke-active::after{animation:denim-smoke-sweep 1.8s cubic-bezier(.2,.7,.2,1) both}
+body.page-mode .page-view{transition:transform 1.55s cubic-bezier(.76,0,.24,1)}
+body.page-mode .page-view[data-view="om"]{background:linear-gradient(90deg,#282827 0%,#f4f3ef 38%,#f4f3ef 100%)}
+body.page-mode .page-view[data-view="om"]{background-color:#f4f3ef;background-image:linear-gradient(90deg,rgba(12,12,12,.78) 0%,rgba(244,243,239,.08) 24%,rgba(244,243,239,.72) 48%,#f4f3ef 64%),url("hero-michael-nannini.png");background-size:100% 100%,auto 160%;background-position:left top,left center;background-repeat:no-repeat}
+body.page-mode .page-view[data-view="om"] .intro-image-placeholder{background:none;color:#f4f3ef;text-shadow:0 1px 5px rgba(0,0,0,.18)}
+@media(max-width:800px){body.page-mode .page-view[data-view="om"]{background-size:100% 100%,85% 100%}body.page-mode .page-view[data-view="om"] .intro-image-placeholder{background:none}}
+body.page-mode .page-view[data-view="om"]{background-image:linear-gradient(90deg,rgba(12,12,12,.78) 0%,rgba(244,243,239,.08) 18%,rgba(244,243,239,.72) 36%,#f4f3ef 48%),url("hero-michael-nannini.png");background-size:100% 100%,auto 160%;background-position:left top,left center;background-repeat:no-repeat}
+body.page-mode .page-view[data-view="om"] .intro-image-placeholder{z-index:1}
+body.page-mode .page-view[data-view="om"] .intro{height:100%}
+body.page-mode .page-view[data-view="om"] .intro-guitar{position:absolute;z-index:2;pointer-events:none;top:-8%;left:24%;height:116%;width:auto;max-width:none;object-fit:contain;transform:rotate(4deg) scale(1.04);transform-origin:center center;filter:drop-shadow(13px 8px 11px rgba(0,0,0,.25))}
+body.page-mode .page-view[data-view="om"] .intro-copy{z-index:3}
+@media(min-width:801px) and (max-width:1280px){body.page-mode .page-view[data-view="om"] .intro-guitar{top:-5%;left:17%;height:108%;transform:rotate(4deg) scale(1.03)}}
+@media(max-width:800px){body.page-mode .page-view[data-view="om"]{background-image:linear-gradient(90deg,rgba(12,12,12,.78) 0%,rgba(244,243,239,.08) 28%,rgba(244,243,239,.72) 48%,#f4f3ef 62%),url("hero-michael-nannini.png");background-size:100% 100%,auto 185%;background-position:left top,left center;background-repeat:no-repeat}body.page-mode .page-view[data-view="om"] .intro{height:auto}body.page-mode .page-view[data-view="om"] .intro-guitar{top:0;left:20%;height:370px;transform:rotate(4deg) scale(1.03)}body.page-mode .page-view[data-view="om"] .intro-copy{margin-top:380px}}
+@media(prefers-reduced-motion:reduce){body.page-mode .page-view{transition:none}}
