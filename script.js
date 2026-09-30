@@ -3,39 +3,100 @@
   const nav = document.querySelector('.main-nav');
   const views = [...document.querySelectorAll('.page-view')];
   const pageStage = document.querySelector('.page-stage');
-  const viewNames = ['home', 'om', 'repertoar', 'evenemang', 'kontakt'];
-  const viewForHash = { home: 'home', om: 'om', repertoar: 'repertoar', spelningar: 'evenemang', evenemang: 'evenemang', kontakt: 'kontakt' };
+  const viewNames = ['home', 'om', 'melodifestivalen', 'repertoar', 'live', 'eget-material', 'evenemang', 'kontakt'];
+  const viewForHash = { home: 'home', om: 'om', melodifestivalen: 'melodifestivalen', repertoar: 'repertoar', live: 'live', 'eget-material': 'eget-material', spelningar: 'evenemang', evenemang: 'evenemang', kontakt: 'kontakt' };
+  const viewFromLocation = () => {
+    const requested = new URLSearchParams(location.search).get('view');
+    return viewNames.includes(requested) ? requested : (viewForHash[location.hash.slice(1)] || 'home');
+  };
   let activeView = views.find(view => view.classList.contains('is-active'))?.dataset.view || 'home';
+  let transitionVersion = 0;
+  let smokeTimer = 0;
+  let slideTimer = 0;
+  let slideAnimations = [];
+
+  const resetViewTransition = () => {
+    transitionVersion += 1;
+    window.clearTimeout(smokeTimer);
+    window.clearTimeout(slideTimer);
+    slideAnimations.forEach(animation => animation.cancel());
+    slideAnimations = [];
+    views.forEach(view => view.classList.remove('is-from-left', 'is-from-right', 'is-leaving-left', 'is-leaving-right'));
+    pageStage?.classList.remove('is-transitioning');
+    pageStage?.classList.remove('is-sliding');
+    document.body.classList.remove('page-smoke-active');
+  };
 
   const showView = (name, updateHistory = true, animate = true) => {
     const next = views.find(view => view.dataset.view === name);
-    if (!next || name === activeView) return;
+    const current = views.find(view => view.classList.contains('is-active'));
+    const currentName = current?.dataset.view || activeView;
+    if (!next || name === currentName) {
+      activeView = currentName;
+      return;
+    }
+    resetViewTransition();
+    const version = transitionVersion;
     if (animate && pageStage) {
+      pageStage.classList.add('is-sliding');
+      slideTimer = window.setTimeout(() => {
+        if (version !== transitionVersion) return;
+        // Restore the resting classes before dropping the WAAPI fill effects.
+        // This prevents CSS from briefly replaying the slide at cleanup time.
+        views.forEach(view => view.classList.remove('is-from-left', 'is-from-right', 'is-leaving-left', 'is-leaving-right'));
+        slideAnimations.forEach(animation => animation.cancel());
+        slideAnimations = [];
+        pageStage.classList.remove('is-sliding');
+      }, 1900);
       pageStage.classList.remove('is-transitioning');
       void pageStage.offsetWidth;
       pageStage.classList.add('is-transitioning');
       document.body.classList.add('page-smoke-active');
-      window.setTimeout(() => {
+      smokeTimer = window.setTimeout(() => {
+        if (version !== transitionVersion) return;
         pageStage.classList.remove('is-transitioning');
         document.body.classList.remove('page-smoke-active');
       }, 1850);
     }
-    const current = views.find(view => view.dataset.view === activeView);
-    const direction = viewNames.indexOf(name) > viewNames.indexOf(activeView) ? 'left' : 'right';
+    let leaveDirection;
+    let enterDirection;
+    if (currentName === 'home') {
+      // Hero always exits left when another header view is selected.
+      leaveDirection = 'left';
+      enterDirection = 'right';
+    } else if (name === 'home') {
+      // Hero always enters from the left when returning from another view.
+      leaveDirection = 'right';
+      enterDirection = 'left';
+    } else {
+      const isMovingForward = viewNames.indexOf(name) > viewNames.indexOf(currentName);
+      leaveDirection = isMovingForward ? 'left' : 'right';
+      enterDirection = isMovingForward ? 'right' : 'left';
+    }
     if (current && animate) {
       current.classList.remove('is-active');
-      current.classList.add(`is-leaving-${direction}`);
+      current.classList.add(`is-leaving-${leaveDirection}`);
       current.setAttribute('aria-hidden', 'true');
-      window.setTimeout(() => current.classList.remove(`is-leaving-${direction}`), 1650);
     } else {
       current?.classList.remove('is-active');
       current?.setAttribute('aria-hidden', 'true');
     }
     next.classList.add('is-active');
     next.setAttribute('aria-hidden', 'false');
-    if (animate) {
-      next.classList.add(direction === 'left' ? 'is-from-right' : 'is-from-left');
-      requestAnimationFrame(() => requestAnimationFrame(() => next.classList.remove('is-from-right', 'is-from-left')));
+    if (animate && current?.animate && next.animate) {
+      const currentWidth = current.getBoundingClientRect().width;
+      const nextWidth = next.getBoundingClientRect().width;
+      const leaveX = leaveDirection === 'left' ? -currentWidth : currentWidth;
+      const enterX = enterDirection === 'left' ? -nextWidth : nextWidth;
+      const slideOptions = { duration: 1850, easing: 'cubic-bezier(.22,.75,.22,1)', fill: 'both' };
+      slideAnimations = [
+        current.animate([{ transform: 'translateX(0)' }, { transform: `translateX(${leaveX}px)` }], slideOptions),
+        next.animate([{ transform: `translateX(${enterX}px)` }, { transform: 'translateX(0)' }], slideOptions)
+      ];
+    } else if (animate) {
+      current?.classList.add(`is-leaving-${leaveDirection}`);
+      next.classList.add(`is-from-${enterDirection}`);
+      requestAnimationFrame(() => requestAnimationFrame(() => next.classList.remove('is-from-left', 'is-from-right')));
     }
     activeView = name;
     if (updateHistory) {
@@ -45,15 +106,36 @@
     next.scrollTop = 0;
   };
 
+  const activateViewImmediately = name => {
+    const target = views.find(view => view.dataset.view === name);
+    if (!target) return;
+    document.body.classList.add('no-view-transition');
+    document.body.classList.remove('page-smoke-active', 'page-enter-from-left', 'page-enter-from-right', 'page-leaving-to-right', 'page-leaving-to-left');
+    resetViewTransition();
+    views.forEach(view => {
+      const active = view === target;
+      view.classList.toggle('is-active', active);
+      view.setAttribute('aria-hidden', String(!active));
+    });
+    activeView = name;
+    target.scrollTop = 0;
+    void pageStage?.offsetWidth;
+    document.body.classList.remove('no-view-transition');
+  };
+
   if (views.length) {
     document.body.classList.add('page-mode');
     views.forEach(view => view.setAttribute('aria-hidden', String(!view.classList.contains('is-active'))));
-    const requestedView = viewForHash[location.hash.slice(1)];
-    if (requestedView && requestedView !== activeView) showView(requestedView, false, false);
-    window.addEventListener('popstate', () => {
-      const view = viewForHash[location.hash.slice(1)] || 'home';
-      showView(view, false, true);
-    });
+    activateViewImmediately(viewFromLocation());
+    const syncViewWithLocation = () => {
+      activateViewImmediately(viewFromLocation());
+    };
+    window.addEventListener('popstate', syncViewWithLocation);
+    // Returning from a standalone event page can restore this document from
+    // the browser's back-forward cache. In that case the URL hash changes
+    // without rerunning this script, so explicitly activate the matching view.
+    window.addEventListener('hashchange', syncViewWithLocation);
+    window.addEventListener('pageshow', syncViewWithLocation);
     document.addEventListener('click', event => {
       const viewLink = event.target.closest('[data-view-link]');
       if (!viewLink) return;
@@ -61,45 +143,40 @@
       showView(viewLink.dataset.viewLink);
       nav?.classList.remove('open');
       menuButton?.setAttribute('aria-expanded', 'false');
+      document.querySelectorAll('.dropdown').forEach(dropdown => {
+        dropdown.classList.remove('open');
+        dropdown.querySelector('.dropdown-toggle')?.setAttribute('aria-expanded', 'false');
+      });
     });
   }
-
-  const getTransition = () => { try { return sessionStorage.getItem('nannini-page-transition'); } catch { return null; } };
-  const setTransition = value => { try { sessionStorage.setItem('nannini-page-transition', value); } catch {} };
-  const clearTransition = () => { try { sessionStorage.removeItem('nannini-page-transition'); } catch {} };
-  const incomingTransition = getTransition();
-  if (incomingTransition) {
-    clearTransition();
-    document.body.classList.add('page-enter-from-left');
-    window.setTimeout(() => document.body.classList.remove('page-enter-from-left'), 750);
-  }
-  document.addEventListener('click', event => {
-    const link = event.target.closest('a[href]');
-    if (!link || link.target === '_blank' || !/\.html(?:#.*)?$/i.test(link.getAttribute('href'))) return;
-    const destination = new URL(link.href, location.href);
-    if (destination.origin !== location.origin || destination.href === location.href) return;
-    event.preventDefault();
-    setTransition('right');
-    document.body.classList.add('page-leaving-to-right');
-    window.setTimeout(() => location.assign(destination.href), 260);
-  });
 
   menuButton?.addEventListener('click', () => {
     const open = nav.classList.toggle('open');
     menuButton.setAttribute('aria-expanded', String(open));
   });
 
-  const dropdown = document.querySelector('.dropdown');
-  const dropdownButton = document.querySelector('.dropdown-toggle');
-  dropdownButton?.addEventListener('click', () => {
-    if (views.length) showView('evenemang');
-    const open = dropdown.classList.toggle('open');
-    dropdownButton.setAttribute('aria-expanded', String(open));
+  const dropdowns = [...document.querySelectorAll('.dropdown')];
+  dropdowns.forEach(dropdown => {
+    const dropdownButton = dropdown.querySelector('.dropdown-toggle');
+    dropdownButton?.addEventListener('click', () => {
+      if (dropdown.classList.contains('events-dropdown') && !views.length) {
+        window.location.assign('index.html?view=evenemang');
+        return;
+      }
+      const open = !dropdown.classList.contains('open');
+      dropdowns.forEach(other => {
+        other.classList.toggle('open', other === dropdown && open);
+        other.querySelector('.dropdown-toggle')?.setAttribute('aria-expanded', String(other === dropdown && open));
+      });
+      if (dropdown.classList.contains('events-dropdown') && views.length) showView('evenemang');
+    });
   });
   document.addEventListener('click', event => {
-    if (dropdown && !dropdown.contains(event.target)) {
-      dropdown.classList.remove('open');
-      dropdownButton?.setAttribute('aria-expanded', 'false');
+    if (!dropdowns.some(dropdown => dropdown.contains(event.target))) {
+      dropdowns.forEach(dropdown => {
+        dropdown.classList.remove('open');
+        dropdown.querySelector('.dropdown-toggle')?.setAttribute('aria-expanded', 'false');
+      });
     }
   });
 
@@ -123,7 +200,7 @@
       if (e.key === 'ArrowDown' || e.key === 'ArrowUp') { e.preventDefault(); offset = (offset + (e.key === 'ArrowDown' ? 48 : -48) + limit()) % limit(); paint(); pause(); }
     });
     let last = performance.now();
-    const tick = now => { const delta = Math.min(now - last, 50); last = now; if (!dragging && now > pausedUntil) { offset = (offset - delta * 0.014 + limit()) % limit(); paint(); } requestAnimationFrame(tick); };
+    const tick = now => { const delta = Math.min(now - last, 50); last = now; if (!dragging && now > pausedUntil) { offset = (offset + delta * 0.014 + limit()) % limit(); paint(); } requestAnimationFrame(tick); };
     requestAnimationFrame(tick);
   }
 

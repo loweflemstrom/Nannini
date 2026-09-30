@@ -173,6 +173,14 @@ body.page-mode .main-nav>a,body.page-mode .dropdown-toggle{font:500 14px/1.3 var
 body.page-mode .demo-note{border-bottom:1px solid rgba(255,255,255,.22)}
 body.page-mode .site-contact-bar{border-top:1px solid #d8d6cf}
 body.page-mode .site-header{border-bottom:1px solid #e1dfd9}
+/* Give the wedding page's original Unsplash photo a softly washed pastel color treatment. */
+.wedding-page .hero-image,.event-detail-page .hero-image{filter:saturate(.48) brightness(1.16) contrast(.88);opacity:.9}
+.wedding-page .hero-shade,.event-detail-page .hero-shade{background:linear-gradient(90deg,rgba(30,28,27,.5) 0%,rgba(30,28,27,.22) 50%,rgba(30,28,27,.06) 100%)}
+.wedding-page main{height:calc(100svh - 113px);overflow:hidden}
+.wedding-page .hero{height:100%;min-height:0;max-height:none}
+@media(max-width:800px){.wedding-page main{height:calc(100svh - 95px)}}
+body.page-mode .site-contact-bar a{display:inline-flex;align-items:center;gap:8px}
+body.page-mode .site-contact-bar .contact-icon{width:16px;height:16px;flex:none;fill:none;stroke:currentColor;stroke-width:1.45;stroke-linecap:round;stroke-linejoin:round}
 body.page-mode .spotify-header svg{width:38px;height:38px}
 @media(max-width:800px){body.page-mode .spotify-header svg{width:35px;height:35px}}
 body.page-mode .page-view[data-view="repertoar"] .music-section{height:100%;min-height:100%;padding-top:38px;padding-bottom:38px}
@@ -303,15 +311,15 @@ body.page-mode .page-view[data-view="home"] .hero-content h1{font-size:clamp(40p
 
 /* Move complete page panels as adjoining slides, with no fade or empty seam. */
 body.page-mode .page-stage,body.page-mode .page-track{overflow:hidden}
-/* Fill any sub-pixel seam between moving page panels without exposing a moving image. */
-body.page-mode .page-stage{background:#242423}
+/* Keep moving page panels fractionally overlapped so the stage never flashes through. */
+body.page-mode .page-stage{background:var(--paper)}
 body.page-mode .page-view{opacity:0;transform:translateX(100%);transition:transform 1.08s cubic-bezier(.76,0,.24,1);will-change:transform}
 body.page-mode .page-view.is-active{opacity:1;transform:translateX(0)}
-body.page-mode .page-view.is-active.is-from-right{opacity:1;transform:translateX(100%)}
-body.page-mode .page-view.is-active.is-from-left{opacity:1;transform:translateX(-100%)}
+body.page-mode .page-view.is-active.is-from-right{opacity:1;transform:translateX(calc(100% - 1px))}
+body.page-mode .page-view.is-active.is-from-left{opacity:1;transform:translateX(calc(-100% + 1px))}
 body.page-mode .page-view.is-leaving-left,body.page-mode .page-view.is-leaving-right{opacity:1;visibility:visible;pointer-events:none}
-body.page-mode .page-view.is-leaving-left{transform:translateX(-100%)}
-body.page-mode .page-view.is-leaving-right{transform:translateX(100%)}
+body.page-mode .page-view.is-leaving-left{transform:translateX(calc(-100% + 1px))}
+body.page-mode .page-view.is-leaving-right{transform:translateX(calc(100% - 1px))}
 @media(prefers-reduced-motion:reduce){body.page-mode .page-view{transition:none}}
 
 /* Give horizontal page changes and the blue smoke a slower, softer finish. */
@@ -328,6 +336,533 @@ body.page-mode .page-view[data-view="om"] .intro-image-placeholder{z-index:1}
 body.page-mode .page-view[data-view="om"] .intro{height:100%}
 body.page-mode .page-view[data-view="om"] .intro-guitar{position:absolute;z-index:2;pointer-events:none;top:-8%;left:24%;height:116%;width:auto;max-width:none;object-fit:contain;transform:rotate(4deg) scale(1.04);transform-origin:center center;filter:drop-shadow(13px 8px 11px rgba(0,0,0,.25))}
 body.page-mode .page-view[data-view="om"] .intro-copy{z-index:3}
+body.page-mode .page-view[data-view="om"] .intro-promise{max-width:none;font:400 18px/1.35 "Barlow Condensed",var(--sans);letter-spacing:-.01em;white-space:nowrap}
+@media(min-width:801px) and (max-width:1280px){body.page-mode .page-view[data-view="om"] .intro-promise{font-size:16px}}
 @media(min-width:801px) and (max-width:1280px){body.page-mode .page-view[data-view="om"] .intro-guitar{top:-5%;left:17%;height:108%;transform:rotate(4deg) scale(1.03)}}
-@media(max-width:800px){body.page-mode .page-view[data-view="om"]{background-image:linear-gradient(90deg,rgba(12,12,12,.78) 0%,rgba(244,243,239,.08) 28%,rgba(244,243,239,.72) 48%,#f4f3ef 62%),url("hero-michael-nannini.png");background-size:100% 100%,auto 185%;background-position:left top,left center;background-repeat:no-repeat}body.page-mode .page-view[data-view="om"] .intro{height:auto}body.page-mode .page-view[data-view="om"] .intro-guitar{top:0;left:20%;height:370px;transform:rotate(4deg) scale(1.03)}body.page-mode .page-view[data-view="om"] .intro-copy{margin-top:380px}}
+@media(max-width:800px){body.page-mode .page-view[data-view="om"]{background-image:linear-gradient(90deg,rgba(12,12,12,.78) 0%,rgba(244,243,239,.08) 28%,rgba(244,243,239,.72) 48%,#f4f3ef 62%),url("hero-michael-nannini.png");background-size:100% 100%,auto 185%;background-position:left top,left center;background-repeat:no-repeat}body.page-mode .page-view[data-view="om"] .intro{height:auto}body.page-mode .page-view[data-view="om"] .intro-guitar{top:0;left:20%;height:370px;transform:rotate(4deg) scale(1.03)}body.page-mode .page-view[data-view="om"] .intro-copy{margin-top:380px}body.page-mode .page-view[data-view="om"] .intro-promise{white-space:normal;font-size:17px}}
 @media(prefers-reduced-motion:reduce){body.page-mode .page-view{transition:none}}
+
+/* Keep oversized page artwork inside its own slide while two views are moving. */
+body.page-mode .page-stage.is-sliding .page-view{overflow:hidden;transition:none!important}
+
+/* Match the event-detail image frame and persistent panels across categories. */
+.event-detail-page main{height:calc(100svh - 113px);overflow:hidden}
+@media(max-width:800px){.event-detail-page main{height:calc(100svh - 95px)}}
+
+/* Direct loads from event-detail pages select their destination view without animating. */
+body.page-mode.no-view-transition .page-view{transition:none!important}
+
+/* Fit all event cards into the same fixed-height stage while preserving a gap before reviews. */
+@media(min-width:1281px){
+  body.page-mode .page-view[data-view="evenemang"] .events-section{width:min(calc(100% - 310px),1500px);max-width:none;margin:0;padding:clamp(34px,5vh,64px) clamp(50px,7vw,112px)}
+  body.page-mode .page-view[data-view="evenemang"] .section-heading{display:block;margin-bottom:12px}
+  body.page-mode .page-view[data-view="evenemang"] .event-cards{grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+  body.page-mode .page-view[data-view="evenemang"] .event-card{height:clamp(180px,26vh,245px)}
+}
+@media(min-width:801px) and (max-width:1280px){
+  body.page-mode .page-view[data-view="evenemang"] .events-section{width:100%;padding:clamp(22px,3vh,38px) 6%}
+  body.page-mode .page-view[data-view="evenemang"] .section-heading{display:block;margin-bottom:10px}
+  body.page-mode .page-view[data-view="evenemang"] .event-cards{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+  body.page-mode .page-view[data-view="evenemang"] .event-card{height:clamp(125px,19vh,175px)}
+  body.page-mode .page-view[data-view="evenemang"] .event-label{font-size:clamp(15px,2vw,22px)}
+}
+body.page-mode .page-view[data-view="evenemang"] .event-card img{filter:saturate(.48) brightness(1.16) contrast(.88);opacity:.9}
+body.page-mode .page-view[data-view="evenemang"] .section-heading>p.eyebrow{max-width:none;margin:0;font-size:10px;letter-spacing:.21em;font-weight:600;line-height:1.7;color:var(--muted);text-transform:uppercase}
+@media(max-width:800px){
+  body.page-mode .page-view[data-view="evenemang"] .events-section{padding:18px 8% 150px}
+  body.page-mode .page-view[data-view="evenemang"] .section-heading{display:block;margin-bottom:10px}
+  body.page-mode .page-view[data-view="evenemang"] .event-cards{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+  body.page-mode .page-view[data-view="evenemang"] .event-card{height:clamp(72px,12vh,100px)}
+  body.page-mode .page-view[data-view="evenemang"] .event-label{left:9px;right:9px;bottom:8px;font-size:clamp(12px,3.7vw,17px)}
+}
+
+
+/* Melodifestivalen shares the textured backdrop and guitar treatment from Om Micke. */
+body.page-mode .page-view[data-view="melodifestivalen"]{background-color:#f4f3ef;background-image:linear-gradient(90deg,rgba(12,12,12,.78) 0%,rgba(244,243,239,.08) 18%,rgba(244,243,239,.72) 36%,#f4f3ef 48%),url("hero-michael-nannini.png");background-size:100% 100%,auto 160%;background-position:left top,left center;background-repeat:no-repeat}
+body.page-mode .page-view[data-view="melodifestivalen"] .intro{height:100%}
+body.page-mode .page-view[data-view="melodifestivalen"] .intro-guitar{position:absolute;z-index:2;pointer-events:none;top:-8%;left:24%;height:116%;width:auto;max-width:none;object-fit:contain;transform:rotate(4deg) scale(1.04);transform-origin:center center;filter:drop-shadow(13px 8px 11px rgba(0,0,0,.25))}
+body.page-mode .page-view[data-view="melodifestivalen"] .intro-copy{z-index:3}
+@media(min-width:801px) and (max-width:1280px){body.page-mode .page-view[data-view="melodifestivalen"] .intro-guitar{top:-5%;left:17%;height:108%;transform:rotate(4deg) scale(1.03)}}
+@media(max-width:800px){body.page-mode .page-view[data-view="melodifestivalen"]{background-image:linear-gradient(90deg,rgba(12,12,12,.78) 0%,rgba(244,243,239,.08) 28%,rgba(244,243,239,.72) 48%,#f4f3ef 62%),url("hero-michael-nannini.png");background-size:100% 100%,auto 185%;background-position:left top,left center;background-repeat:no-repeat}body.page-mode .page-view[data-view="melodifestivalen"] .intro{height:auto}body.page-mode .page-view[data-view="melodifestivalen"] .intro-guitar{top:0;left:20%;height:370px;transform:rotate(4deg) scale(1.03)}}
+
+/* Melodifestivalen: same charcoal background as Repertoar, with a softly blended portrait. */
+body.page-mode .page-view[data-view="melodifestivalen"]{background:#292926;color:#f5f4f0}
+body.page-mode .page-view[data-view="melodifestivalen"] .mello-feature{width:calc(100% - 310px);height:100%;min-height:100%;margin:0 auto;padding:clamp(28px,5vh,60px) 5%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(18px,3vh,30px);text-align:center}
+body.page-mode .page-view[data-view="melodifestivalen"] .mello-copy{max-width:650px}
+body.page-mode .page-view[data-view="melodifestivalen"] .mello-copy .eyebrow{color:#b8b7b0;margin-bottom:8px}
+body.page-mode .page-view[data-view="melodifestivalen"] .mello-copy h2{font:400 clamp(32px,4vw,52px)/1.12 var(--serif);letter-spacing:-.035em;margin:0 0 10px}
+body.page-mode .page-view[data-view="melodifestivalen"] .mello-copy>p:last-child{margin:0;color:#d0cfc9;font-size:14px}
+body.page-mode .page-view[data-view="melodifestivalen"] .mello-photo{position:relative;width:clamp(280px,30%,440px);max-height:48vh;aspect-ratio:4/3;margin:0;overflow:hidden;box-shadow:0 18px 52px rgba(0,0,0,.24);-webkit-mask-image:linear-gradient(to bottom,transparent 0%,#000 9%,#000 91%,transparent 100%);mask-image:linear-gradient(to bottom,transparent 0%,#000 9%,#000 91%,transparent 100%)}
+body.page-mode .page-view[data-view="melodifestivalen"] .mello-photo img{width:100%;height:100%;display:block;object-fit:cover;object-position:center 46%;filter:grayscale(100%) contrast(.94);mix-blend-mode:screen;opacity:.88}
+@media(max-width:1280px){body.page-mode .page-view[data-view="melodifestivalen"] .mello-feature{width:calc(100% - 270px)}}
+@media(max-width:800px){body.page-mode .page-view[data-view="melodifestivalen"] .mello-feature{width:100%;height:100%;padding:28px 7% 36vh;gap:20px}body.page-mode .page-view[data-view="melodifestivalen"] .mello-photo{width:min(78vw,420px);max-height:37vh}}
+
+/* Shared layouts for the Musiken dropdown views. */
+body.page-mode .page-view[data-view="repertoar"],body.page-mode .page-view[data-view="live"],body.page-mode .page-view[data-view="eget-material"]{background:var(--paper);color:var(--ink)}
+body.page-mode .page-view[data-view="repertoar"] .music-overview{width:calc(100% - 310px);max-width:1150px;min-height:100%;margin:0 auto;padding:clamp(42px,7vh,90px) 4%;display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(36px,6vw,88px);align-items:center}
+body.page-mode .music-overview-copy h2,body.page-mode .music-editorial h2,body.page-mode .own-music-copy h2{font:400 clamp(38px,4.2vw,58px)/1.12 var(--serif);letter-spacing:-.035em;margin:0 0 18px}
+body.page-mode .music-overview-copy>p:not(.eyebrow),body.page-mode .music-editorial>p:not(.eyebrow),body.page-mode .own-music-copy>p:not(.eyebrow){max-width:460px;color:#68675f;font:400 17px/1.7 var(--serif)}
+body.page-mode .page-view[data-view="repertoar"] .genre-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:repeat(6,minmax(0,1fr));grid-auto-flow:column;align-self:stretch;gap:0;margin:0;padding:0;list-style:none;border-top:1px solid var(--line)}
+body.page-mode .page-view[data-view="repertoar"] .genre-list li{display:flex;align-items:center;padding:10px 8px 10px 0;border-bottom:1px solid var(--line);font-size:13px;color:#69685f}
+body.page-mode .page-view[data-view="live"] .music-editorial{width:calc(100% - 310px);max-width:820px;min-height:100%;margin:0 auto;padding:clamp(55px,10vh,120px) 6%;display:flex;flex-direction:column;justify-content:center;align-items:flex-start}
+body.page-mode .page-view[data-view="live"] .music-editorial .button{margin-top:18px}
+body.page-mode .page-view[data-view="eget-material"] .own-music{width:calc(100% - 310px);max-width:1120px;min-height:100%;margin:0 auto;padding:clamp(42px,7vh,90px) 4%;display:grid;grid-template-columns:minmax(0,1fr) minmax(280px,440px);gap:clamp(36px,6vw,88px);align-items:center}
+body.page-mode .own-music-copy .repertoire-todo{margin:28px 0 0;padding-left:18px;color:#77766e;font-size:12px;line-height:1.9}
+body.page-mode .own-music-player .player-card{width:100%;padding:14px 0;background:transparent;border:0;display:grid;grid-template-columns:1fr;gap:12px}
+body.page-mode .own-music-player .track-info{grid-template-columns:1fr;gap:12px}
+body.page-mode .own-music-player .track-info strong{font:500 20px var(--serif)}
+body.page-mode .own-music-player #track-select{width:100%;padding:10px;border:1px solid var(--line);background:#fff;color:var(--ink);font:13px var(--sans)}
+body.page-mode .own-music-player .player-card audio{width:100%;height:40px}
+@media(max-width:1280px){body.page-mode .page-view[data-view="repertoar"] .music-overview,body.page-mode .page-view[data-view="live"] .music-editorial,body.page-mode .page-view[data-view="eget-material"] .own-music{width:calc(100% - 270px)}}
+@media(max-width:800px){body.page-mode .page-view[data-view="repertoar"] .music-overview,body.page-mode .page-view[data-view="live"] .music-editorial,body.page-mode .page-view[data-view="eget-material"] .own-music{width:100%;min-height:100%;padding:35px 8% 190px;display:flex;flex-direction:column;align-items:stretch;justify-content:center;gap:26px}body.page-mode .page-view[data-view="repertoar"] .music-overview{justify-content:flex-start}body.page-mode .page-view[data-view="repertoar"] .genre-list{min-height:350px}body.page-mode .page-view[data-view="repertoar"] .genre-list li{font-size:11px}body.page-mode .page-view[data-view="live"] .music-editorial{align-items:flex-start}body.page-mode .music-overview-copy h2,body.page-mode .music-editorial h2,body.page-mode .own-music-copy h2{font-size:clamp(34px,9vw,46px)}}
+
+/* Refined, consistent depth for the three header playback controls. */
+.header-playback-controls{filter:none;transition:none}
+.header-playback-controls::before{display:none}
+.brand-group .track-skip svg,.brand-group .header-player-toggle svg{filter:drop-shadow(1px 0 0 rgba(255,255,255,.7)) drop-shadow(2px 2px 1px rgba(0,0,0,.24)) drop-shadow(4px 6px 5px rgba(0,0,0,.2));transition:filter .2s ease}
+.brand-group .track-skip:hover svg,.brand-group .header-player-toggle:hover svg,.brand-group .track-skip:focus-visible svg,.brand-group .header-player-toggle:focus-visible svg{filter:drop-shadow(1px 0 0 rgba(255,255,255,.72)) drop-shadow(2px 3px 1px rgba(0,0,0,.27)) drop-shadow(5px 8px 7px rgba(0,0,0,.23))}
+.brand-group .track-skip:focus-visible,.brand-group .header-player-toggle:focus-visible{outline:2px solid #77766e;outline-offset:3px;border-radius:50%}
+
+/* Place the Melodifestivalen portrait as a full-height hero image. */
+body.page-mode .page-view[data-view="melodifestivalen"] .mello-feature{position:relative;width:100%;height:100%;min-height:100%;margin:0;padding:0;display:flex;align-items:center;justify-content:flex-end;overflow:hidden;text-align:left;background:#292926}
+body.page-mode .page-view[data-view="melodifestivalen"] .mello-photo{position:absolute;inset:0 auto 0 0;width:76%;height:100%;max-height:none;aspect-ratio:auto;margin:0;overflow:hidden;box-shadow:none;-webkit-mask-image:linear-gradient(90deg,#000 0%,#000 55%,transparent 100%);mask-image:linear-gradient(90deg,#000 0%,#000 55%,transparent 100%)}
+body.page-mode .page-view[data-view="melodifestivalen"] .mello-photo img{width:100%;height:100%;object-fit:cover;object-position:center 42%;filter:grayscale(100%) contrast(.96);mix-blend-mode:screen;opacity:.88}
+body.page-mode .page-view[data-view="melodifestivalen"] .mello-copy{position:relative;z-index:2;width:min(42%,520px);margin-right:calc(310px + 5%);padding:40px 0;color:#f5f4f0;text-align:left}
+body.page-mode .page-view[data-view="melodifestivalen"] .mello-copy .eyebrow{color:#c5c4bd}
+body.page-mode .page-view[data-view="melodifestivalen"] .mello-copy h2{font:400 clamp(42px,5.3vw,76px)/1.08 var(--serif);letter-spacing:-.04em;margin:0 0 20px}
+body.page-mode .page-view[data-view="melodifestivalen"] .mello-copy>p:last-child{max-width:420px;color:#e0dfda;font-size:15px;line-height:1.7}
+@media(max-width:1280px){body.page-mode .page-view[data-view="melodifestivalen"] .mello-copy{margin-right:calc(270px + 4%);width:min(44%,480px)}body.page-mode .page-view[data-view="melodifestivalen"] .mello-photo{width:82%}}
+@media(max-width:800px){body.page-mode .page-view[data-view="melodifestivalen"] .mello-feature{align-items:flex-end;justify-content:center;padding:0 8% 34vh}body.page-mode .page-view[data-view="melodifestivalen"] .mello-photo{inset:0 0 auto;width:100%;height:72%;-webkit-mask-image:linear-gradient(180deg,#000 0%,#000 55%,transparent 100%);mask-image:linear-gradient(180deg,#000 0%,#000 55%,transparent 100%)}body.page-mode .page-view[data-view="melodifestivalen"] .mello-copy{width:100%;margin:0;padding:0;align-self:flex-end}body.page-mode .page-view[data-view="melodifestivalen"] .mello-copy h2{font-size:clamp(36px,10vw,54px)}body.page-mode .page-view[data-view="melodifestivalen"] .mello-copy>p:last-child{font-size:13px}}
+
+/* Fade the clean Mello performance still into white behind the copy. */
+body.page-mode .page-view[data-view="melodifestivalen"] .mello-feature{background:#fff;color:var(--ink)}
+body.page-mode .page-view[data-view="melodifestivalen"] .mello-feature::after{content: '';position:absolute;z-index:1;inset:0;pointer-events:none;background:linear-gradient(90deg,transparent 24%,rgba(255,255,255,.12) 39%,rgba(255,255,255,.78) 58%,#fff 76%)}
+body.page-mode .page-view[data-view="melodifestivalen"] .mello-photo{width:76%;-webkit-mask-image:linear-gradient(90deg,#000 0%,#000 48%,transparent 86%);mask-image:linear-gradient(90deg,#000 0%,#000 48%,transparent 86%)}
+body.page-mode .page-view[data-view="melodifestivalen"] .mello-photo img{filter:none;mix-blend-mode:normal;opacity:1;object-position:center 42%}
+body.page-mode .page-view[data-view="melodifestivalen"] .mello-copy{color:var(--ink);width:min(36%,480px);margin-right:calc(310px + 5%)}
+body.page-mode .page-view[data-view="melodifestivalen"] .mello-copy .eyebrow{color:var(--muted)}
+body.page-mode .page-view[data-view="melodifestivalen"] .mello-copy>p:last-child{color:#55544f}
+@media(max-width:1280px){body.page-mode .page-view[data-view="melodifestivalen"] .mello-copy{margin-right:calc(270px + 4%);width:min(40%,460px)}}
+@media(max-width:800px){body.page-mode .page-view[data-view="melodifestivalen"] .mello-feature{background:#fff;color:var(--ink)}body.page-mode .page-view[data-view="melodifestivalen"] .mello-feature::after{background:linear-gradient(180deg,transparent 24%,rgba(255,255,255,.25) 48%,rgba(255,255,255,.9) 68%,#fff 79%)}body.page-mode .page-view[data-view="melodifestivalen"] .mello-photo{width:100%;-webkit-mask-image:linear-gradient(180deg,#000 0%,#000 48%,transparent 100%);mask-image:linear-gradient(180deg,#000 0%,#000 48%,transparent 100%)}body.page-mode .page-view[data-view="melodifestivalen"] .mello-copy{color:var(--ink)}body.page-mode .page-view[data-view="melodifestivalen"] .mello-copy .eyebrow{color:var(--muted)}body.page-mode .page-view[data-view="melodifestivalen"] .mello-copy>p:last-child{color:#55544f}}
+
+/* Shift the performer left and soften the original red stage tones. */
+body.page-mode .page-view[data-view="melodifestivalen"] .mello-photo img{width:112%;max-width:none;transform:translateX(-8%);filter:saturate(.78) brightness(1.13) contrast(.91);opacity:.82}
+@media(max-width:800px){body.page-mode .page-view[data-view="melodifestivalen"] .mello-photo img{width:100%;transform:none;filter:saturate(.78) brightness(1.13) contrast(.91);opacity:.82}}
+
+body.page-mode .mello-song-link{display:inline-flex;align-items:center;gap:6px;color:inherit;text-decoration:underline;text-decoration-color:rgba(34,34,31,.38);text-underline-offset:3px;white-space:nowrap}
+body.page-mode .mello-song-link:hover{text-decoration-color:currentColor}
+body.page-mode .youtube-inline-icon{width:19px;height:auto;flex:none;color:#c4302b;vertical-align:middle}
+
+/* Mello hero composition: performer on the left, a clear text column on the right. */
+body.page-mode .page-view[data-view="melodifestivalen"] .mello-feature{position:relative;isolation:isolate;display:block;min-height:100%;height:100%;width:100%;padding:0;background:#fff;overflow:hidden}
+body.page-mode .page-view[data-view="melodifestivalen"] .mello-feature::after{content: '';position:absolute;z-index:1;inset:0;pointer-events:none;background:linear-gradient(90deg,transparent 22%,rgba(255,255,255,.12) 37%,rgba(255,255,255,.78) 56%,#fff 74%)}
+body.page-mode .page-view[data-view="melodifestivalen"] .mello-photo{position:absolute;z-index:0;left:0;top:0;bottom:0;width:72%;height:100%;max-height:none;margin:0;overflow:hidden;box-shadow:none;aspect-ratio:auto;-webkit-mask-image:linear-gradient(90deg,#000 0%,#000 47%,transparent 86%);mask-image:linear-gradient(90deg,#000 0%,#000 47%,transparent 86%)}
+body.page-mode .page-view[data-view="melodifestivalen"] .mello-photo img{display:block;width:125%;max-width:none;height:100%;object-fit:cover;object-position:center 42%;transform:translateX(-19%);filter:saturate(.8) brightness(1.12) contrast(.92)!important;mix-blend-mode:normal!important;opacity:.88}
+body.page-mode .page-view[data-view="melodifestivalen"] .mello-copy{position:absolute;z-index:2;top:50%;right:calc(310px + 5%);transform:translateY(-50%);width:min(36%,480px);margin:0;padding:34px 0;color:var(--ink);text-align:left}
+body.page-mode .page-view[data-view="melodifestivalen"] .mello-copy .eyebrow{color:var(--muted)}
+body.page-mode .page-view[data-view="melodifestivalen"] .mello-copy h2{font-size:clamp(38px,4.5vw,62px);line-height:1.08;margin:0 0 20px}
+body.page-mode .page-view[data-view="melodifestivalen"] .mello-copy>p:last-child{max-width:440px;margin:0;color:#55544f;font:400 16px/1.75 var(--serif)}
+body.page-mode .mello-song-link{display:inline;white-space:normal}
+body.page-mode .youtube-inline-icon{display:inline-block!important;width:1.35em!important;height:1em!important;max-width:none!important;vertical-align:-.12em;margin-left:.28em;color:#c4302b;flex:none}
+body.page-mode .youtube-inline-icon path{fill:#c4302b!important}
+@media(max-width:1280px) and (min-width:801px){body.page-mode .page-view[data-view="melodifestivalen"] .mello-copy{right:calc(270px + 3%);width:min(42%,420px)}body.page-mode .page-view[data-view="melodifestivalen"] .mello-photo{width:77%}body.page-mode .page-view[data-view="melodifestivalen"] .mello-photo img{width:130%;transform:translateX(-21%)}}
+@media(max-width:800px){body.page-mode .page-view[data-view="melodifestivalen"] .mello-feature{height:100%;min-height:100%;padding:0 7% 34vh;background:#fff}body.page-mode .page-view[data-view="melodifestivalen"] .mello-feature::after{background:linear-gradient(180deg,transparent 20%,rgba(255,255,255,.3) 48%,rgba(255,255,255,.94) 70%,#fff 82%)}body.page-mode .page-view[data-view="melodifestivalen"] .mello-photo{left:0;right:0;top:0;bottom:auto;width:100%;height:72%;-webkit-mask-image:linear-gradient(180deg,#000 0%,#000 50%,transparent 100%);mask-image:linear-gradient(180deg,#000 0%,#000 50%,transparent 100%)}body.page-mode .page-view[data-view="melodifestivalen"] .mello-photo img{width:100%;transform:none;object-position:center 35%}body.page-mode .page-view[data-view="melodifestivalen"] .mello-copy{top:auto;right:auto;bottom:35vh;left:7%;transform:none;width:86%;padding:0}body.page-mode .page-view[data-view="melodifestivalen"] .mello-copy h2{font-size:clamp(36px,10vw,54px)}}
+@media(max-width:1280px) and (min-width:801px){body.page-mode .page-view[data-view="melodifestivalen"] .mello-photo{width:60%}body.page-mode .page-view[data-view="melodifestivalen"] .mello-photo img{width:125%;transform:translateX(-19%)}body.page-mode .page-view[data-view="melodifestivalen"] .mello-copy{right:calc(270px + 2%);width:min(34%,300px)}}
+
+body.page-mode .mello-youtube-badge{display:inline-flex;align-items:center;justify-content:center;margin-left:.24em;vertical-align:.05em;color:#c4302b;text-decoration:none}
+body.page-mode .mello-youtube-badge svg{display:block;width:1.15em;height:.82em;overflow:visible}
+body.page-mode .mello-youtube-badge:hover{color:#a8201b}
+body.page-mode .youtube-inline-icon{display:none!important}
+/* Melodifestivalen link: separated from the copy with a subtle 3D lift. */
+body.page-mode .mello-copy .mello-youtube-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: max-content;
+  margin: 18px 0 0;
+  filter: drop-shadow(1px 1px 0 rgba(255,255,255,.62)) drop-shadow(2px 3px 1px rgba(0,0,0,.2)) drop-shadow(4px 6px 5px rgba(0,0,0,.18));
+  transition: filter .2s ease, transform .2s ease;
+}
+body.page-mode .mello-copy .mello-youtube-badge svg {
+  display: block;
+  width: 44px;
+  height: 31px;
+  overflow: visible;
+}
+body.page-mode .mello-copy .mello-youtube-badge:hover,
+body.page-mode .mello-copy .mello-youtube-badge:focus-visible {
+  transform: translateY(-2px);
+  filter: drop-shadow(1px 1px 0 rgba(255,255,255,.72)) drop-shadow(3px 5px 2px rgba(0,0,0,.3)) drop-shadow(7px 11px 9px rgba(0,0,0,.28));
+}
+/* Center the complete desktop header row and use one shared gap on every page. */
+@media (min-width: 801px) {
+  .site-header {
+    justify-content: center;
+    gap: clamp(12px, 1.55vw, 24px);
+    padding-left: 3.5%;
+    padding-right: 3.5%;
+  }
+  .site-header > .brand-group,
+  .site-header > .main-nav {
+    display: contents;
+  }
+  .site-header .main-nav {
+    position: static;
+    inset: auto;
+    transform: none;
+    width: auto;
+    max-width: none;
+    min-width: 0;
+    flex: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+  .site-header .brand-group .wordmark,
+  .site-header .brand-group .header-playback-controls,
+  .site-header .main-nav > *,
+  .site-header .main-nav .dropdown {
+    flex: none;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .site-header .brand-group .header-playback-controls {
+    gap: 1px;
+  }
+  .site-header .main-nav > .dropdown,
+  .site-header .main-nav > a {
+    justify-self: auto;
+  }
+}
+@media (min-width: 801px) and (max-width: 980px) {
+  .site-header {
+    gap: 9px;
+    padding-left: 2%;
+    padding-right: 2%;
+  }
+  .site-header .wordmark { font-size: 21px; }
+  .site-header .brand-group .track-skip { width: 24px; }
+  .site-header .brand-group .track-skip svg { width: 18px; height: 18px; }
+  .site-header .brand-group .header-player-toggle { width: 38px; height: 42px; }
+  .site-header .brand-group .header-player-toggle svg { width: 34px; height: 34px; }
+  .site-header .main-nav > a,
+  .site-header .dropdown-toggle { font-size: 12px; }
+  .site-header .nav-contact { padding: 7px 9px; }
+  .site-header .spotify-header svg { width: 31px; height: 31px; }
+}
+@media (max-width: 800px) {
+  .site-header > .brand-group { display: flex; }
+  .site-header > .main-nav { display: none; }
+  .site-header > .main-nav.open { display: flex; }
+}
+@media (min-width: 801px) { .site-header .header-playback-controls > * { margin: 0; } }
+
+
+/* Blend the Melodifestivalen image into the same warm paper tone as the page. */
+body.page-mode .page-view[data-view="melodifestivalen"] .mello-feature {
+  background: var(--paper);
+}
+body.page-mode .page-view[data-view="melodifestivalen"] .mello-feature::after {
+  background: linear-gradient(90deg, transparent 22%, rgba(244,243,239,.12) 37%, rgba(244,243,239,.78) 56%, var(--paper) 74%);
+}
+@media (max-width: 800px) {
+  body.page-mode .page-view[data-view="melodifestivalen"] .mello-feature::after {
+    background: linear-gradient(180deg, transparent 20%, rgba(244,243,239,.3) 48%, rgba(244,243,239,.94) 70%, var(--paper) 82%);
+  }
+}
+
+/* Keep the header and bottom contact strip pure white. */
+.site-header,
+body.page-mode .site-contact-bar {
+  background-color: #fff;
+}
+
+
+
+/* Live page: three vertically stacked video features. */
+body.page-mode .page-view[data-view="live"] .live-videos {
+  width: min(920px, calc(100% - 64px));
+  min-height: 100%;
+  margin: 0 auto;
+  padding: clamp(22px, 3.5vh, 38px) 0 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+body.page-mode .page-view[data-view="live"] .live-videos > h2 {
+  margin: 0;
+  font: 400 clamp(30px, 3.5vw, 46px)/1.12 var(--serif);
+  letter-spacing: -.035em;
+}
+body.page-mode .page-view[data-view="live"] .live-video-list {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-rows: repeat(3, minmax(118px, 1fr));
+  gap: 12px;
+}
+body.page-mode .page-view[data-view="live"] .live-video-card {
+  position: relative;
+  min-height: 118px;
+  display: grid;
+  grid-template-columns: minmax(180px, 34%) minmax(0, 1fr) 54px;
+  align-items: center;
+  overflow: hidden;
+  color: var(--ink);
+  background: #e9e8e3;
+  border: 1px solid #d9d7d0;
+  text-decoration: none;
+}
+body.page-mode .page-view[data-view="live"] a.live-video-card { transition: transform .2s ease, box-shadow .2s ease; }
+body.page-mode .page-view[data-view="live"] a.live-video-card:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(34,34,31,.12); }
+body.page-mode .page-view[data-view="live"] .live-video-card > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 118px;
+  object-fit: cover;
+  filter: saturate(.72);
+}
+body.page-mode .page-view[data-view="live"] .live-video-copy {
+  min-width: 0;
+  padding: 15px clamp(15px, 2.4vw, 30px);
+  display: grid;
+  gap: 5px;
+}
+body.page-mode .page-view[data-view="live"] .live-video-copy .eyebrow { margin: 0; font-size: 9px; }
+body.page-mode .page-view[data-view="live"] .live-video-copy strong { font: 400 clamp(18px, 2vw, 25px)/1.25 var(--serif); }
+body.page-mode .page-view[data-view="live"] .live-video-source { color: #77766e; font-size: 11px; }
+body.page-mode .page-view[data-view="live"] .live-video-source b { margin-left: 5px; font-size: 14px; }
+body.page-mode .page-view[data-view="live"] .live-video-play { display: grid; place-items: center; padding-right: 15px; }
+body.page-mode .page-view[data-view="live"] .live-video-play svg { display: block; width: 34px; height: 24px; filter: drop-shadow(0 2px 3px rgba(0,0,0,.18)); }
+body.page-mode .page-view[data-view="live"] .live-video-placeholder { opacity: .74; }
+@media (max-width: 800px) {
+  body.page-mode .page-view[data-view="live"] .live-videos { width: 100%; min-height: 100%; padding: 28px 7% 185px; gap: 18px; }
+  body.page-mode .page-view[data-view="live"] .live-videos > h2 { font-size: clamp(29px, 8vw, 40px); }
+  body.page-mode .page-view[data-view="live"] .live-video-list { flex: none; grid-template-rows: repeat(3, minmax(132px, 1fr)); gap: 12px; }
+  body.page-mode .page-view[data-view="live"] .live-video-card { grid-template-columns: 36% minmax(0,1fr) 40px; min-height: 132px; }
+  body.page-mode .page-view[data-view="live"] .live-video-card > img { min-height: 132px; }
+  body.page-mode .page-view[data-view="live"] .live-video-copy { padding: 10px 12px; }
+  body.page-mode .page-view[data-view="live"] .live-video-copy .eyebrow { font-size: 8px; }
+  body.page-mode .page-view[data-view="live"] .live-video-copy strong { font-size: 18px; }
+  body.page-mode .page-view[data-view="live"] .live-video-source { font-size: 10px; }
+  body.page-mode .page-view[data-view="live"] .live-video-play { padding-right: 9px; }
+  body.page-mode .page-view[data-view="live"] .live-video-play svg { width: 27px; height: 20px; }
+}
+
+/* Eget material: full-height portrait on the left, player and heading on the right. */
+body.page-mode .page-view[data-view="eget-material"] .own-music {
+  position: relative;
+  isolation: isolate;
+  width: min(1120px, calc(100% - 64px));
+  max-width: none;
+  min-height: 100%;
+  margin: 0 auto;
+  padding: clamp(32px, 6vh, 66px) 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 440px);
+  gap: clamp(24px, 4vw, 56px);
+  align-items: center;
+}
+body.page-mode .page-view[data-view="eget-material"] .own-music-portrait {
+  position: absolute;
+  z-index: -1;
+  left: 0;
+  top: 0;
+  width: 56%;
+  height: 100%;
+  object-fit: cover;
+  object-position: left center;
+  -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 68%, transparent 100%);
+  mask-image: linear-gradient(90deg, #000 0%, #000 68%, transparent 100%);
+}
+body.page-mode .page-view[data-view="eget-material"] .own-music-player {
+  grid-column: 2;
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  align-self: center;
+}
+body.page-mode .page-view[data-view="eget-material"] .own-music-title {
+  margin: 0 0 20px;
+  font: 400 clamp(38px, 4.2vw, 58px)/1.12 var(--serif);
+  letter-spacing: -.035em;
+}
+body.page-mode .page-view[data-view="eget-material"] .own-music-player .track-info { gap: 0; }
+@media (max-width: 1280px) and (min-width: 801px) {
+  body.page-mode .page-view[data-view="eget-material"] .own-music {
+    width: calc(100% - 48px);
+    grid-template-columns: minmax(0, 1fr) minmax(280px, 42%);
+    gap: 24px;
+  }
+  body.page-mode .page-view[data-view="eget-material"] .own-music-portrait { width: 57%; }
+}
+@media (max-width: 800px) {
+  body.page-mode .page-view[data-view="eget-material"] .own-music {
+    width: 100%;
+    min-height: 100%;
+    padding: 35px 8% 185px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-end;
+    gap: 0;
+  }
+  body.page-mode .page-view[data-view="eget-material"] .own-music-portrait {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 58%;
+    object-position: left 25%;
+    -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 58%, transparent 100%);
+    mask-image: linear-gradient(180deg, #000 0%, #000 58%, transparent 100%);
+  }
+  body.page-mode .page-view[data-view="eget-material"] .own-music-player {
+    width: 100%;
+    margin-top: auto;
+  }
+  body.page-mode .page-view[data-view="eget-material"] .own-music-title { font-size: clamp(34px, 9vw, 46px); }
+}
+
+/* Full-width own-material photo: original portrait at left, stretched street filling the rest. */
+body.page-mode .page-stage:has(.page-view[data-view="eget-material"].is-active)::before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  inset: 0 -300px 0 0;
+  pointer-events: none;
+  background-color: var(--paper);
+  background-image: linear-gradient(90deg, transparent 0%, rgba(244,243,239,.02) 36%, rgba(244,243,239,.24) 53%, rgba(244,243,239,.7) 76%, rgba(244,243,239,.84) 100%), url("own-music-panorama.png");
+  background-size: 100% 100%, 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+body.page-mode .page-view[data-view="eget-material"] { background: transparent; }
+body.page-mode .page-view[data-view="eget-material"] .own-music {
+  width: 100%;
+  max-width: none;
+  min-height: 100%;
+  margin: 0;
+  padding: clamp(30px, 6vh, 62px) 6%;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 460px);
+  gap: clamp(24px, 4vw, 56px);
+}
+body.page-mode .page-view[data-view="eget-material"] .own-music-player {
+  padding: clamp(20px, 3vw, 38px);
+  background: rgba(244,243,239,.84);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+body.page-mode .page-view[data-view="eget-material"] .own-music-title { margin-bottom: 16px; }
+@media (min-width: 801px) and (max-width: 1280px) {
+  body.page-mode .page-stage:has(.page-view[data-view="eget-material"].is-active)::before { right: -285px; }
+  body.page-mode .page-view[data-view="eget-material"] .own-music {
+    width: 100%;
+    padding-right: 4%;
+    padding-left: 4%;
+    grid-template-columns: minmax(0, 1fr) minmax(270px, 42%);
+    gap: 22px;
+  }
+}
+@media (max-width: 800px) {
+  body.page-mode .page-view[data-view="eget-material"] { background: transparent; }
+  body.page-mode .page-stage:has(.page-view[data-view="eget-material"].is-active)::before {
+    inset: 0;
+    background-image: linear-gradient(180deg, rgba(244,243,239,.03) 0%, rgba(244,243,239,.06) 38%, rgba(244,243,239,.94) 63%, var(--paper) 100%), url("own-music-panorama.png");
+    background-size: 100% 100%, auto 60%;
+    background-position: center, left top;
+  }
+  body.page-mode .page-view[data-view="eget-material"] .own-music {
+    width: 100%;
+    min-height: 100%;
+    padding: 35px 8% 185px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-end;
+    gap: 0;
+  }
+  body.page-mode .page-view[data-view="eget-material"] .own-music-player {
+    width: 100%;
+    margin-top: auto;
+    padding: 20px;
+  }
+}
+
+/* Keep the supplied portrait exact on the left over the extended panorama. */
+body.page-mode .page-view[data-view="eget-material"] .own-music-portrait {
+  position: absolute;
+  z-index: -1;
+  left: 0;
+  top: 0;
+  width: 43%;
+  height: 100%;
+  object-fit: cover;
+  object-position: left 42%;
+  -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 78%, transparent 100%);
+  mask-image: linear-gradient(90deg, #000 0%, #000 78%, transparent 100%);
+}
+@media (min-width: 801px) and (max-width: 1280px) {
+  body.page-mode .page-view[data-view="eget-material"] .own-music-portrait { width: 48%; }
+}
+@media (max-width: 800px) {
+  body.page-mode .page-view[data-view="eget-material"] .own-music-portrait {
+    width: 100%;
+    height: 55%;
+    object-position: left 25%;
+    -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 72%, transparent 100%);
+    mask-image: linear-gradient(180deg, #000 0%, #000 72%, transparent 100%);
+  }
+}
+
+/* Andra evenemang is a text-only detail page with a soft dark backdrop. */
+body.other-events-page .site-header,
+body.event-detail-page .site-header { background-color: #fff; }
+body.event-detail-page main.other-events-main {
+  height: calc(100svh - 164px);
+  min-height: 500px;
+  margin: 0;
+}
+body.event-detail-page .other-events-hero {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  max-height: none;
+  background: radial-gradient(ellipse at 32% 46%, #41403d 0%, #302f2c 54%, #242422 100%);
+  color: #f7f6f2;
+}
+body.event-detail-page .other-events-hero .hero-content {
+  left: 12%;
+  right: 12%;
+  max-width: 760px;
+}
+body.event-detail-page .other-events-hero .hero h1,
+body.event-detail-page .other-events-hero h1 { color: #f7f6f2; }
+body.event-detail-page .other-events-hero .eyebrow { color: #d2d0c9; }
+body.event-detail-page .other-events-hero .button { margin-top: 14px; }
+@media(max-width:800px) {
+  body.event-detail-page main.other-events-main { height: calc(100svh - 150px); min-height: 440px; }
+  body.event-detail-page .other-events-hero .hero-content { left: 8%; right: 8%; }
+}
+
+/* Keep the contact form, especially its message field, inside the area left of reviews. */
+body.page-mode .page-view[data-view="kontakt"] .contact-section {
+  width: 100%;
+  max-width: 1120px;
+  margin: 0 auto;
+  grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+  gap: clamp(28px, 6vw, 76px);
+}
+body.page-mode .page-view[data-view="kontakt"] .contact-form,
+body.page-mode .page-view[data-view="kontakt"] .contact-form textarea {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+}
+@media (max-width: 800px) {
+  body.page-mode .page-view[data-view="kontakt"] .contact-section {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 25px;
+    padding-bottom: 260px;
+  }
+}
